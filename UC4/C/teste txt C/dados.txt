@@ -1,4 +1,0 @@
-id,nome,idade
-1,Ana,25
-2,Beto,30
-3,Carla,28
