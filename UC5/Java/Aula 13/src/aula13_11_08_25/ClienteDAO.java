@@ -9,20 +9,36 @@ import java.util.List;
 
 public class ClienteDAO {
 	
+	//Verificar se email já existe
 	public void inserir(Cliente cliente) {
-		String sql = "INSERT INTO clientes (nome, email) VALUES (?, ?)";
-		try (Connection conn = Conexao.getConnection(); 
-			PreparedStatement stmt = conn.prepareStatement(sql)) {
-			
-			stmt.setString(1, cliente.getNome());
-			stmt.setString(2, cliente.getEmail());
-			stmt.executeUpdate();
-			
-			System.out.println("Cliente cadastrado com sucesso.");
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+	    String checarSql = "SELECT 1 FROM clientes WHERE email = ?";
+	    
+	    String inserirSql = "INSERT INTO clientes (nome, email) VALUES (?, ?)";
+	    
+	    try (Connection conn = Conexao.getConnection();
+	         PreparedStatement checarStmt = conn.prepareStatement(checarSql)) {
+	        
+	        checarStmt.setString(1, cliente.getEmail());
+	        
+	        ResultSet rs = checarStmt.executeQuery();
+	        
+	        if (rs.next()) {
+	            System.out.println("Já existe um cliente cadastrado com esse email: " + cliente.getEmail());
+	        } else {
+	            try (PreparedStatement inserirStmt = conn.prepareStatement(inserirSql)) {
+	                inserirStmt.setString(1, cliente.getNome());
+	                inserirStmt.setString(2, cliente.getEmail());
+	                inserirStmt.executeUpdate();
+	                
+	                System.out.println("Cliente cadastrado com sucesso.");
+	            }
+	        }
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
 	}
+
 	
 	public List<Cliente> listarClientes() {
 		List<Cliente> lista = new ArrayList<>();
@@ -46,35 +62,63 @@ public class ClienteDAO {
 		return lista;
 	}
 	
+	//Atualizar somente se o id existir
 	public void atualizar(Cliente cliente) {
-		String sql = "UPDATE clientes SET nome=?, email=? WHERE id=?";
-		try (Connection conn = Conexao.getConnection(); 
-			PreparedStatement stmt = conn.prepareStatement(sql)) {
-			
-			stmt.setString(1, cliente.getNome());
-			stmt.setString(2, cliente.getEmail());
-			stmt.setInt(3, cliente.getId());
-			stmt.executeUpdate();
-			
-			System.out.println("Cliente atualizado com sucesso!");
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+	    String checarSql = "SELECT 1 FROM clientes WHERE id = ?";
+	    
+	    String atualizarSql = "UPDATE clientes SET nome = ?, email = ? WHERE id = ?";
+	    
+	    try (Connection conn = Conexao.getConnection();
+	         PreparedStatement checarStmt = conn.prepareStatement(checarSql)) {
+	        checarStmt.setInt(1, cliente.getId());
+
+	        ResultSet rs = checarStmt.executeQuery();
+	        
+	        if (rs.next()) {
+	            try (PreparedStatement atualizarStmt = conn.prepareStatement(atualizarSql)) {
+	                atualizarStmt.setString(1, cliente.getNome());
+	                atualizarStmt.setString(2, cliente.getEmail());
+	                atualizarStmt.setInt(3, cliente.getId());
+
+	                atualizarStmt.executeUpdate();
+
+	                System.out.println("Cliente atualizado com sucesso!");
+	            }
+	        } else {
+	            System.out.println("Cliente com ID " + cliente.getId() + " não encontrado.");
+	        }
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
 	}
+
 	
 	public void deletar(int id) {
-		String sql = "DELETE FROM clientes WHERE id=?";
-		try (Connection conn = Conexao.getConnection(); 
-			PreparedStatement stmt = conn.prepareStatement(sql)) {
-			
-			stmt.setInt(1, id);
-			stmt.executeUpdate();
-			
-			System.out.println("Cliente removido com sucesso.");
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+	    String delSql = "DELETE FROM clientes WHERE id = ?";
+	    
+	    //Verificar se o id existe antes de apagar
+	    String checarSql = "SELECT 1 FROM clientes WHERE id = ?";
+	    
+	    try (Connection conn = Conexao.getConnection();
+	         PreparedStatement checarStmt = conn.prepareStatement(checarSql)) {
+	        
+	        checarStmt.setInt(1, id);
+	        ResultSet rs = checarStmt.executeQuery();
+
+	        if (rs.next()) {
+	            try (PreparedStatement delStmt = conn.prepareStatement(delSql)) {
+	                delStmt.setInt(1, id);
+	                delStmt.executeUpdate();
+	                System.out.println("Cliente removido com sucesso.");
+	            }
+	        } else {
+	            System.out.println("Cliente com ID " + id + " não encontrado.");
+	        }
+	        
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
 	}
+
 }
