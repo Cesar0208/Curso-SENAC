@@ -3,7 +3,6 @@ package br.com.sistemacomercial.view;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.zip.DeflaterOutputStream;
 
 import javax.swing.table.DefaultTableModel;
 
@@ -92,3 +91,4 @@ public class TelaCadastroProduto extends JFrame{
 	}
 
 }
+
