@@ -13,7 +13,7 @@ create table comclien(
 );
 
 create table comforne(
-	n_numeroforne int not null auto_increment primary key,
+	n_numeforne int not null auto_increment primary key,
     c_codiforne varchar(10),
     c_nomeforne varchar(100),
     c_razaforne varchar(100),
@@ -41,13 +41,25 @@ create table comprodu(
 create table comvenda(
 	n_numevenda int not null auto_increment primary key,
     c_codivenda varchar(10),
-    n_numeclien varchar(10),
+    n_numeclien int,
     n_numeforne int not null,
     n_numevende int not null,
     n_valovenda decimal(10,2),
     n_descvenda decimal(10,2),
     n_totalvenda decimal(10,2),
     d_datavenda date
+);
+
+create table comvendas(
+	n_numevenda int not null auto_increment primary key,
+	c_codivenda varchar(10),
+	n_numeclien int not null,
+	n_numeforne int not null,
+	n_numevende int not null,
+	n_valovenda decimal(10,2),
+	n_descvenda decimal(10,2),
+	n_totavenda decimal(10,2),
+	d_datavenda date
 );
 
 create table comivenda(
@@ -59,8 +71,15 @@ create table comivenda(
     n_descivenda decimal(10,2)
 );
 
+alter table comvenda add constraint fk_comprodu_conforme
+foreign key(n_numeforne)
+references comforne(n_numeforne)
+on delete no action
+on update no action;
+
 alter table comvenda add constraint fk_comprodu_comvende
-foreign key(n_numevende) references comvende(n_numevende)
+foreign key(n_numevende) 
+references comvende(n_numevende)
 on delete no action
 on update no action;
 
