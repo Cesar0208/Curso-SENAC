@@ -174,3 +174,74 @@ body {
   color: #bfa046;
   margin-bottom: 10px;
 }
+
+.depoimentos {
+  padding: 100px 0;
+  background-color: #0f172a;
+  color: white;
+}
+
+.depoimentos-grid {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 50px;
+}
+
+.card-depoimento {
+  background-color: #1e293b;
+  padding: 30px;
+  border-radius: 8px;
+  width: 300px;
+}
+
+.card-depoimento .texto {
+  font-style: italic;
+  margin-bottom: 20px;
+}
+
+.card-depoimento .nome {
+  color: #bfa046;
+}
+
+.footer {
+  background-color: #0f172a; /* azul escuro */
+  color: #fff;
+  padding: 60px 10% 20px;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+
+.footer-col {
+  flex: 1;
+  min-width: 250px;
+}
+
+.footer-col h3,
+.footer-col h4 {
+  margin-bottom: 15px;
+  color: #c9a227; /* dourado */
+}
+
+.footer-col ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-col li {
+  margin-bottom: 8px;
+}
+
+.footer-bottom {
+  margin-top: 40px;
+  border-top: 1px solid rgba(255,255,255,0.2);
+  padding-top: 20px;
+  text-align: center;
+  font-size: 14px;
+}
