@@ -1,6 +1,13 @@
 import CardServico from "../components/CardServico"
+import { useState } from "react"
 
 function Servicos(){
+
+  const [mostrarServicos, setMostrarServicos] = useState(true);
+
+  function alternarServicos() {
+    setMostrarServicos(!mostrarServicos);
+  }
 
   const listaServicos = [
     {
@@ -23,19 +30,25 @@ function Servicos(){
 
       <h2>Nossos Serviços</h2>
 
-      <div className="grid-servicos">
+      <button onClick={alternarServicos}>
+        {mostrarServicos ? "Esconder Serviços" : "Mostrar serviços"}
+      </button>
 
-        {listaServicos.map((servico, index) => (
-          
-          <CardServico
-            key={index}
-            titulo={servico.titulo}
-            descricao={servico.descricao}
-          />
+      {mostrarServicos && (
+        <div className="grid-servicos">
 
-        ))}
+          {listaServicos.map((servico, index) => (
+            
+            <CardServico
+              key={index}
+              titulo={servico.titulo}
+              descricao={servico.descricao}
+            />
 
-      </div>
+          ))}
+
+        </div>
+      )}
 
     </section>
 

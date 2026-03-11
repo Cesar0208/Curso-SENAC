@@ -77,13 +77,13 @@ nav a:hover {
   max-width: 1200px;
   margin: 3rem auto;
   padding: 0 5%;
+  text-align: center;
 }
 
 .servicos h2 {
   font-size: 2rem;
   font-weight: 700;
   margin-bottom: 2rem;
-  text-align: center;
   color: var(--text-color);
 }
 
@@ -92,6 +92,7 @@ nav a:hover {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 2rem;
+  margin-top: 1rem;
 }
 
 /* Card Styles */
@@ -126,7 +127,7 @@ nav a:hover {
 }
 
 /* Button Styles */
-.card-servico button {
+button {
   background-color: var(--primary-color);
   color: white;
   border: none;
@@ -139,12 +140,34 @@ nav a:hover {
   font-size: 0.9rem;
 }
 
-.card-servico button:hover {
+button:hover {
   background-color: var(--primary-hover);
 }
 
-.card-servico button:active {
+button:active {
   transform: scale(0.98);
+}
+
+.contato {
+  max-width: 1200px;
+  margin: 3rem auto;
+  padding: 0 5%;
+  text-align: center;
+}
+
+.form-contato button {
+  width: 170px;
+  margin-left: 10px;
+}
+
+input {
+    width: 250px;
+    padding: 10px 15px;
+    font-size: 16px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+
 }
 
 /* Responsive Adjustments */
