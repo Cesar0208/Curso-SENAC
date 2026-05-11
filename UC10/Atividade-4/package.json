@@ -1,0 +1,13 @@
+{
+  "name": "projeto-testes-jest",
+  "version": "1.0.0",
+  "description": "Projeto educacional com testes unitários usando Jest",
+  "scripts": {
+    "test": "jest",
+    "test:verbose": "jest --verbose",
+    "test:coverage": "jest --coverage"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}
