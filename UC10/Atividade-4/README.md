@@ -1,4 +1,4 @@
-# Relatório de Testes Unitários — [Nome do Grupo]
+# Relatório de Testes Unitários para o BurguerPI
 
 ## Sobre o Projeto
 
