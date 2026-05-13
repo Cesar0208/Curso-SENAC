@@ -1,4 +1,4 @@
-# Relatório de Testes Unitários para o BurguerPI
+# Relatório de Testes Unitários para o PI Cardápio
 
 ## Sobre o Projeto
 
